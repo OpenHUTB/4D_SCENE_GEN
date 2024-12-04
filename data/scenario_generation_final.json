@@ -1,0 +1,207 @@
+[
+  {
+    "instruction": "在道路上添加第一辆车，并设置运动轨迹",
+    "input": "",
+    "output": "car1 = vehicle(scenario,'ClassID', 1,'Position', [-198.44 106.29 0.01],'FrontOverhang', 0.9,'Mesh', driving.scenario.carMesh,'Name', 'Car');\nwaypoints = [-198.44 106.29 0.01;-198.2 119.9 0;-198.2 131.5 0;-198.2 142.9 0;-198.4 149.7 0;-202.7 152.1 0;-208.4 152.3 0;-210.5 155 0;-210.5 163.8 0;-210.6 172.7 0;-210.6 184.3 0;-210.54 194.03 0.01];\nspeed = [30;30;30;30;30;30;30;30;30;30;30;30];\ntrajectory(car1, waypoints, speed);\n"
+  },
+  {
+    "instruction": "在道路上添加第二辆车与第三辆车，并分别设置运动轨迹",
+    "input": "",
+    "output": "car2 = vehicle(scenario,'ClassID', 1,'Position', [-165.7 154.5 0],'FrontOverhang', 0.9,'Mesh', driving.scenario.carMesh,'Name', 'Car1');\nwaypoints = [-165.7 154.5 0;-185.1 154.6 0;-194.3 154.5 0;-204.8 154.3 0;-209.9 154.3 0;-212.9 157.2 0;-213.3 164.9 0;-213.3 174.8 0;-213.4 185.5 0;-213.47 193.97 0.01];\nspeed = [30;30;30;30;30;30;30;30;30;30];\ntrajectory(car2, waypoints, speed);\n\ncar3 = vehicle(scenario,'ClassID', 1,'Position', [-210.399763718369 103.407818627883 0],'FrontOverhang', 0.9,'Name', 'Car2');\nwaypoints = [-210.399763718369 103.407818627883 0;-210.5 114.6 0;-210.5 125.4 0;-210.4 135.5 0;-210.4 143.3 0;-208.4 146.6 0;-203.3 148.2 0;-193.6 148.5 0;-184.6 148.5 0;-174.9 148.7 0;-163.9 148.8 0];\nspeed = [30;30;30;30;30;30;30;30;30;30;30];\ntrajectory(car3, waypoints, speed);\n"
+  },
+  {
+    "instruction": "生成下午的场景",
+    "input": "",
+    "output": "fname = 'auto_created_model';\nclose_system(fname, 0)\nh = new_system(fname);\nadd_block('drivingsim3d/Simulation 3D Scene Configuration', 'auto_created_model/test');\nset_param('auto_created_model/test', 'SceneDesc', 'Parking lot');\nset_param('auto_created_model/test', 'EnableWeather', 'on');\nset_param('auto_created_model/test', 'SunAltitude', '45');\nset_param('auto_created_model/test', 'SunAzimuth', '0');\nsim(fname);\n%  0 表示关闭而不保存\nclose_system(fname, 0)\n"
+  },
+  {
+    "instruction": "生成城市场景",
+    "input": "",
+    "output": "dbclear if error\nfname = 'auto_created_model';\nclose_system(fname, 0)\nh = new_system(fname);\nadd_block('drivingsim3d/Simulation 3D Scene Configuration', 'auto_created_model/test');\nset_param('auto_created_model/test', 'SceneDesc', 'US city block');\nsim(fname);\n%  0 表示关闭而不保存\nclose_system(fname, 0)\n"
+  },
+  {
+    "instruction": "生成黄昏的场景",
+    "input": "",
+    "output": "dbclear if error\nfname = 'auto_created_model';\nclose_system(fname, 0)\nh = new_system(fname);\nadd_block('drivingsim3d/Simulation 3D Scene Configuration', 'auto_created_model/test');\nset_param('auto_created_model/test', 'SceneDesc', 'Double lane change');\nset_param('auto_created_model/test', 'EnableWeather', 'on');\nset_param('auto_created_model/test', 'SunAltitude', '0');\nset_param('auto_created_model/test', 'SunAzimuth', '0');\nsim(fname);\n%  0 表示关闭而不保存\nclose_system(fname, 0)\n"
+  },
+  {
+    "instruction": "生成上午的场景",
+    "input": "",
+    "output": "fname = 'auto_created_model';\nclose_system(fname, 0)\nh = new_system(fname);\nadd_block('drivingsim3d/Simulation 3D Scene Configuration', 'auto_created_model/test');\nset_param('auto_created_model/test', 'SceneDesc', 'Open surface');\nset_param('auto_created_model/test', 'EnableWeather', 'on');\nset_param('auto_created_model/test', 'SunAltitude', '45');\nset_param('auto_created_model/test', 'SunAzimuth', '180');\nsim(fname);\n%  0 表示关闭而不保存\nclose_system(fname, 0)\n"
+  },
+  {
+    "instruction": "生成多云的场景",
+    "input": "",
+    "output": "fname = 'auto_created_model';\nclose_system(fname, 0)\nh = new_system(fname);\nadd_block('drivingsim3d/Simulation 3D Scene Configuration', 'auto_created_model/test');\nset_param('auto_created_model/test', 'SceneDesc', 'Virtual Mcity');\nset_param('auto_created_model/test', 'EnableWeather', 'on');\nset_param('auto_created_model/test', 'clouds', '100');\nsim(fname);\n%  0 表示关闭而不保存\nclose_system(fname, 0)\n"
+  },
+  {
+    "instruction": "生成下浓雾的场景",
+    "input": "",
+    "output": "fname = 'auto_created_model';\nclose_system(fname, 0)\nh = new_system(fname);\nadd_block('drivingsim3d/Simulation 3D Scene Configuration', 'auto_created_model/test');\nset_param('auto_created_model/test', 'EnableWeather', 'on');\nset_param('auto_created_model/test', 'fog', '95');\nsim(fname);\n%  0 表示关闭而不保存\nclose_system(fname, 0)\n"
+  },
+  {
+    "instruction": "生成下大雨的场景",
+    "input": "",
+    "output": "fname = 'auto_created_model';\nclose_system(fname, 0)\nh = new_system(fname);\nadd_block('drivingsim3d/Simulation 3D Scene Configuration', 'auto_created_model/test');\nset_param('auto_created_model/test', 'SceneDesc', 'Large parking lot');\nset_param('auto_created_model/test', 'EnableWeather', 'on');\nset_param('auto_created_model/test', 'rain', '100');\nsim(fname);\n%  0 表示关闭而不保存\nclose_system(fname, 0)\n"
+  },
+  {
+    "instruction": "生成早上的场景",
+    "input": "",
+    "output": "fname = 'auto_created_model';\nclose_system(fname, 0);\nh = new_system(fname);\nadd_block('drivingsim3d/Simulation 3D Scene Configuration', 'auto_created_model/test');\nset_param('auto_created_model/test', 'EnableWeather', 'on');\nset_param('auto_created_model/test', 'SunAltitude', '30');\nset_param('auto_created_model/test', 'SunAzimuth', '180');\nsim(fname);\n%  0 表示关闭而不保存\nclose_system(fname, 0)\n"
+  },
+  {
+    "instruction": "生成日出的场景",
+    "input": "",
+    "output": "fname = 'auto_created_model';\nclose_system(fname, 0);\nh = new_system(fname);\nadd_block('drivingsim3d/Simulation 3D Scene Configuration', 'auto_created_model/test');\nset_param('auto_created_model/test', 'EnableWeather', 'on');\nset_param('auto_created_model/test', 'SunAltitude', '90');\nset_param('auto_created_model/test', 'SunAzimuth', '180');\nsim(fname);\n%  0 表示关闭而不保存\nclose_system(fname, 0)\n"
+  },
+  {
+    "instruction": "创建一个由两条路构建的十字路口",
+    "input": "",
+    "output": "roadCenters = [100 0 0;150 0 0];\nlaneSpecification = lanespec([4 4], 'Width', 4);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road');\nroadCenters = [125 -25 0;125 25 0];\nlaneSpecifications = [lanespec([1 1], 'Width', 4) lanespec([2 2], 'Width', 4)];\nlsConnector = laneSpecConnector('Position', 'Both', 'TaperShape', 'None');\ncompLaneSpecification = compositeLaneSpec(laneSpecifications, 'Connector', lsConnector);\nroad(scenario, roadCenters, 'Lanes', compLaneSpecification, 'Name', 'Road1');\n"
+  },
+  {
+    "instruction": "创建一条直路，道路的中心点的坐标为-217 25 0 -217 40 0",
+    "input": "",
+    "output": "roadCenters = [-217 25 0;-217 40 0];\nmarking1 = [laneMarking('Solid') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Solid')];\nmarking2 = [laneMarking('Solid') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecifications = [lanespec(4, 'Width', 4, 'Marking', marking1) lanespec(3, 'Width', 4, 'Marking', marking2)];\nlsConnector = laneSpecConnector('Position', 'Left', 'TaperLength', 1);\ncompLaneSpecification = compositeLaneSpec(laneSpecifications, 'Connector', lsConnector, 'SegmentRange', [0.4 0.6]);\nroad(scenario, roadCenters, 'Lanes', compLaneSpecification, 'Name', 'Road10');\n"
+  },
+  {
+    "instruction": "创建一条直路，道路的中心点坐标为-233 25 0 -233 -40 0",
+    "input": "",
+    "output": "roadCenters = [-233 25 0;-233 40 0];\nmarking1 = [laneMarking('Solid') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Solid')];\nmarking2 = [laneMarking('Solid') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecifications = [lanespec(4, 'Width', 4, 'Marking', marking1) lanespec(3, 'Width', 4, 'Marking', marking2)];\nlsConnector = laneSpecConnector('Position', 'Right', 'TaperLength', 1);\ncompLaneSpecification = compositeLaneSpec(laneSpecifications, 'Connector', lsConnector, 'SegmentRange', [0.4 0.6]);\nroad(scenario, roadCenters, 'Lanes', compLaneSpecification, 'Name', 'Road11');\n"
+  },
+  {
+    "instruction": "创建一条直路，道路的中心点坐标为-250 0 0 -300 0 0",
+    "input": "",
+    "output": "roadCenters = [-250 0 0;-300 0 0];\nmarking = [laneMarking('Solid') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecification = lanespec(8, 'Width', 4, 'Marking', marking);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road12');\n"
+  },
+  {
+    "instruction": "创建一条直路，道路的中心点坐标为-213 200 0 -213 90 0",
+    "input": "",
+    "output": "roadCenters = [-213 200 0;-213 90 0];\nlaneSpecification = lanespec(2, 'Width', 4);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road13');\n"
+  },
+  {
+    "instruction": "创建一条直路，道路的中心点坐标为-237 195 0 -237 90 0",
+    "input": "",
+    "output": "roadCenters = [-237 195 0;-237 90 0];\nlaneSpecification = lanespec(2, 'Width', 4);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road14');\n"
+  },
+  {
+    "instruction": "创建一条直路，道路的中心点坐标为-213 90 0 -213 40 0",
+    "input": "",
+    "output": "roadCenters = [-213 90 0;-213 40 0];\nmarking1 = [laneMarking('Solid') laneMarking('Dashed') laneMarking('Dashed')];\nmarking2 = [laneMarking('Solid') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecifications = [lanespec(2, 'Width', 4, 'Marking', marking1) lanespec(3, 'Width', 4, 'Marking', marking2)];\nlsConnector = laneSpecConnector('Position', 'Right', 'TaperLength', 4);\ncompLaneSpecification = compositeLaneSpec(laneSpecifications, 'Connector', lsConnector, 'SegmentRange', [0.2 0.8]);\nroad(scenario, roadCenters, 'Lanes', compLaneSpecification, 'Name', 'Road15');\n"
+  },
+  {
+    "instruction": "创建一条长弧形道路，弧形曲率为30度",
+    "input": "",
+    "output": "%30\nroadCenters = [-212.94 192.09 0;-211.3 212.4 0;-210.34 215.29 0;-208.44 219.89 0;-186.55 251.19 0;-149.54 290.29 0;-24.64 365.69 0;180.46 385.89 0];\nmarking = [laneMarking('Unmarked') laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecification = lanespec(2, 'Width', 4, 'Marking', marking);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road16');\n"
+  },
+  {
+    "instruction": "创建一条弧形道路，弧形角度为15度",
+    "input": "",
+    "output": "%15\nroadCenters = [-455.68 381.04 0;-382.68 373.04 0;-264.68 308.04 0;-236.48 214.44 0;-236.71 204.75 0;-236.97 191.45 0];\nmarking = [laneMarking('Unmarked') laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecification = lanespec(2, 'Width', 4, 'Marking', marking);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road17');\n"
+  },
+  {
+    "instruction": "创建一条弧形道路，弧形道路的弧度为50度",
+    "input": "",
+    "output": "%50\nroadCenters = [-260.7 301.5 0;-234 349 0;-219 356 0;-163 351 0;-95.36 330.96 0];\nmarking = [laneMarking('Unmarked') laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecification = lanespec(2, 'Width', 4, 'Marking', marking);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road18');\n"
+  },
+  {
+    "instruction": "创建一条直路，道路的中心点坐标为-227 446.8 0 -227 354.8 0",
+    "input": "",
+    "output": "roadCenters = [-227 446.8 0;-227 354.8 0];\nmarking = [laneMarking('Unmarked') laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecification = lanespec(2, 'Width', 4, 'Marking', marking);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road19');\n"
+  },
+  {
+    "instruction": "创建一条直路，道路的中心点坐标为-199.96 144.04 0 -200 100 0",
+    "input": "",
+    "output": "roadCenters = [-199.96 144.04 0; -200 100 0];\nmarking = [laneMarking('Unmarked') laneMarking('Solid', 'Color', [0.98 0.86 0.36]) laneMarking('Unmarked')];\nlaneSpecification = lanespec(2, 'Width', 3, 'Marking', marking);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road2');\n"
+  },
+  {
+    "instruction": "创建一条直路，道路中心点坐标为125 -25 0 125 -100 0",
+    "input": "",
+    "output": "roadCenters = [125 -25 0;125 -100 0];\nmarking = [laneMarking('Solid') laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecification = lanespec(2, 'Width', 4, 'Marking', marking);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road2');\n"
+  },
+  {
+    "instruction": "创建一条直路，道路的中心点坐标为-103.4 483.2 0 -225.9 444.7 0",
+    "input": "",
+    "output": "roadCenters = [-103.4 483.2 0;-225.9 444.7 0];\nmarking = [laneMarking('Unmarked') laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecification = lanespec(2, 'Width', 4, 'Marking', marking);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road20');\n"
+  },
+  {
+    "instruction": "创建一条弧形道路，弧形道路的弧度为60度",
+    "input": "",
+    "output": "%60\nroadCenters = [-207.8 682 0;-148.1 528.6 0;-6.7 434.3 0;95.9 416.2 0;130.7 417.4 0];\nmarking = [laneMarking('Unmarked') laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecification = lanespec(2, 'Width', 4, 'Marking', marking);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road21');\n"
+  },
+  {
+    "instruction": "创建一条直路，道路的中心点坐标为-227 559 0 -226.6 445 0",
+    "input": "",
+    "output": "roadCenters = [-277 559 0;-226.6 445 0];\nmarking = [laneMarking('Unmarked') laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecification = lanespec(2, 'Width', 4, 'Marking', marking);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road22');\n"
+  },
+  {
+    "instruction": "创建一条弧形道路，弧形道路的弧度为40度",
+    "input": "",
+    "output": "%40\nroadCenters = [-237 681 0; -281.8 548.9 0; -328.7 481 0; -461.2 428.7 0];\nmarking = [laneMarking('Unmarked') laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecification = lanespec(2, 'Width', 4, 'Marking', marking);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road23');\n"
+  },
+  {
+    "instruction": "创建一条直路，道路的中心坐标为152.7 386.2 0 125.8 365 0",
+    "input": "",
+    "output": "roadCenters = [152.7 386.2 0;125.8 356 0];\nmarking = [laneMarking('Unmarked') laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecification = lanespec(2, 'Width', 4, 'Marking', marking);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road24');\n"
+  },
+  {
+    "instruction": "创建一条直路，道路的中心点坐标为-237 90 0 -237 40 0",
+    "input": "",
+    "output": "roadCenters = [-237 90 0;-237 40 0];\nmarking1 = [laneMarking('Solid') laneMarking('Dashed') laneMarking('Dashed')];\nmarking2 = [laneMarking('Solid') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecifications = [lanespec(2, 'Width', 4, 'Marking', marking1) lanespec(3, 'Width', 4, 'Marking', marking2)];\nlsConnector = laneSpecConnector('Position', 'Left', 'TaperLength', 4);\ncompLaneSpecification = compositeLaneSpec(laneSpecifications, 'Connector', lsConnector, 'SegmentRange', [0.2 0.8]);\nroad(scenario, roadCenters, 'Lanes', compLaneSpecification, 'Name', 'Road25');\n"
+  },
+  {
+    "instruction": "添加一条直路，道路的中心点坐标为-212 200 0 -212 100 0",
+    "input": "",
+    "output": "roadCenters = [-212 200 0; -212 100 0];\nmarking = [laneMarking('Unmarked') laneMarking('Dashed') laneMarking('Unmarked')];\nlaneSpecification = lanespec(2, 'Width', 3, 'Marking', marking);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road1');\n"
+  },
+  {
+    "instruction": "创建一条直路，道路的中心坐标为125 25 0 125 500 0",
+    "input": "",
+    "output": "roadCenters = [125 25 0;125 500 0];\nmarking = [laneMarking('Solid') laneMarking('Dashed') laneMarking('DoubleSolid', 'Color', [0.98 0.86 0.36]) laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecification = lanespec(4, 'Width', 4, 'Marking', marking);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road3');\n"
+  },
+  {
+    "instruction": "添加一条直路，道路的中心点坐标为-209.05 149.98 0 -162 150 0",
+    "input": "",
+    "output": "roadCenters = [-209.05 149.98 0; -162 150 0];\nmarking = [laneMarking('Unmarked') laneMarking('Dashed') laneMarking('Solid', 'Color', [0.98 0.86 0.36]) laneMarking('Dashed') laneMarking('Unmarked')];\nlaneSpecification = lanespec([2 2], 'Width', 3, 'Marking', marking);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road');\n"
+  },
+  {
+    "instruction": "创建一条直路，道路的中心点坐标为150 0 0 200 0 0",
+    "input": "",
+    "output": "roadCenters = [150 0 0;200 0 0];\nmarking = [laneMarking('Solid') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecification = lanespec(8, 'Width', 4, 'Marking', marking);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road4');\n"
+  },
+  {
+    "instruction": "创建一条直路，道路的中心点坐标为100 0 0 -200 0 0",
+    "input": "",
+    "output": "roadCenters = [100 0 0;-200 0 0];\nmarking1 = [laneMarking('Solid') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Solid')];\nmarking2 = [laneMarking('Solid') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed')];\nmarking3 = [laneMarking('Solid') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecifications = [lanespec(8, 'Width', 4, 'Marking', marking1) lanespec(6, 'Width', 4, 'Marking', marking2) lanespec(8, 'Width', 4, 'Marking', marking3)];\nlsConnector = laneSpecConnector('Position', 'Both', 'TaperLength', 5);\ncompLaneSpecification = compositeLaneSpec(laneSpecifications, 'Connector', lsConnector, 'SegmentRange', [0.05 0.9 0.05]);\nroad(scenario, roadCenters, 'Lanes', compLaneSpecification, 'Name', 'Road5');\n"
+  },
+  {
+    "instruction": "创建一条直道，道路的中心点坐标为-250 0 0 -200 0 0",
+    "input": "",
+    "output": "roadCenters = [-250 0 0;-200 0 0];\nlaneSpecification = lanespec([4 4], 'Width', 4);\nroad(scenario, roadCenters, 'Lanes', laneSpecification, 'Name', 'Road6');\n"
+  },
+  {
+    "instruction": "创建一条直道，道路的中心点坐标为-225 -25 0 -225 25 0",
+    "input": "",
+    "output": "roadCenters = [-225 -25 0;-225 25 0];\nlaneSpecifications = [lanespec([4 4], 'Width', 4) lanespec([4 4], 'Width', 4)];\nlsConnector = laneSpecConnector('TaperShape', 'None');\ncompLaneSpecification = compositeLaneSpec(laneSpecifications, 'Connector', lsConnector);\nroad(scenario, roadCenters, 'Lanes', compLaneSpecification, 'Name', 'Road7');\n"
+  },
+  {
+    "instruction": "创建一条直路，道路的中心点坐标为-217 -25 0 -217 -100 0",
+    "input": "",
+    "output": "roadCenters = [-217 -25 0;-217 -100 0];\nmarking1 = [laneMarking('Solid') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Solid')];\nmarking2 = [laneMarking('Solid') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecifications = [lanespec(4, 'Width', 4, 'Marking', marking1) lanespec(3, 'Width', 4, 'Marking', marking2)];\nlsConnector = laneSpecConnector('Position', 'Right', 'TaperLength', 5);\ncompLaneSpecification = compositeLaneSpec(laneSpecifications, 'Connector', lsConnector, 'SegmentRange', [0.1 0.9]);\nroad(scenario, roadCenters, 'Lanes', compLaneSpecification, 'Name', 'Road8');\n"
+  },
+  {
+    "instruction": "创建一条直路，道路的中心点的坐标为-233 -25 0 -233 -100 0",
+    "input": "",
+    "output": "roadCenters = [-233 -25 0;-233 -100 0];\nmarking1 = [laneMarking('Solid') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Solid')];\nmarking2 = [laneMarking('Solid') laneMarking('Dashed') laneMarking('Dashed') laneMarking('Solid')];\nlaneSpecifications = [lanespec(4, 'Width', 4, 'Marking', marking1) lanespec(3, 'Width', 4, 'Marking', marking2)];\nlsConnector = laneSpecConnector('Position', 'Left', 'TaperLength', 5);\ncompLaneSpecification = compositeLaneSpec(laneSpecifications, 'Connector', lsConnector, 'SegmentRange', [0.1 0.9]);\nroad(scenario, roadCenters, 'Lanes', compLaneSpecification, 'Name', 'Road9');\n"
+  },
+  {
+    "instruction": "生成下小雨的场景",
+    "input": "",
+    "output": "fname = 'auto_created_model';\nclose_system(fname, 0);\nh = new_system(fname);\nadd_block('drivingsim3d/Simulation 3D Scene Configuration', 'auto_created_model/test');\nset_param('auto_created_model/test', 'EnableWeather', 'on');\nset_param('auto_created_model/test', 'rain', '10');\nsim(fname);\n%  0 表示关闭而不保存\nclose_system(fname, 0)\n"
+  },
+  {
+    "instruction": "生成日出的场景",
+    "input": "",
+    "output": "fname = 'auto_created_model';\nclose_system(fname, 0);\nh = new_system(fname);\nadd_block('drivingsim3d/Simulation 3D Scene Configuration', 'auto_created_model/test');\nset_param('auto_created_model/test', 'EnableWeather', 'on');\nset_param('auto_created_model/test', 'SunAltitude', '0');\nset_param('auto_created_model/test', 'SunAzimuth', '180');\nsim(fname);\n%  0 表示关闭而不保存\nclose_system(fname, 0)\n"
+  }
+]

@@ -1,0 +1,902 @@
+[
+  {
+    "instruction": "从楚枫桥导航到湘江楼",
+    "input": "",
+    "output": "spawn_location = carla.Location(52, 52, 1)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(-100, -200, 10)\n"
+  },
+  {
+    "instruction": "添加11辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 11:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "导航从科技楼到北门",
+    "input": "",
+    "output": "spawn_location = carla.Location(-95, -220, 10)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(234, 20, 1)\n"
+  },
+  {
+    "instruction": "添加40辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 40:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "添加100辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 100:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "请开展从北门外到日新楼的导航",
+    "input": "",
+    "output": "spawn_location = carla.Location(234, 20, 1)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(70, -60, 30)\n"
+  },
+  {
+    "instruction": "添加12个人",
+    "input": "",
+    "output": "for i in range(12):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "从北门外导航到体育馆",
+    "input": "",
+    "output": "spawn_location = carla.Location(234, 20, 1)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(212, -321, 30)\n"
+  },
+  {
+    "instruction": "添加10个人",
+    "input": "",
+    "output": "for i in range(10):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "导航从北门外到北门",
+    "input": "",
+    "output": "spawn_location = carla.Location(234, 20, 1)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(234, 20, 1)\n"
+  },
+  {
+    "instruction": "添加15个人",
+    "input": "",
+    "output": "for i in range(15):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "请开展从北门到湘江楼的导航",
+    "input": "",
+    "output": "spawn_location = carla.Location(234, 20, 1)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(-100, -200, 10)\n"
+  },
+  {
+    "instruction": "添加20个人",
+    "input": "",
+    "output": "for i in range(20):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "从北门导航到科技楼",
+    "input": "",
+    "output": "spawn_location = carla.Location(234, 20, 1)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(-95, -220, 10)\n"
+  },
+  {
+    "instruction": "添加25个人",
+    "input": "",
+    "output": "for i in range(25):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "请开展从西门到北门的导航",
+    "input": "",
+    "output": "spawn_location = carla.Location(-146, -161, 10)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(234, 20, 1)\n"
+  },
+  {
+    "instruction": "添加30个人",
+    "input": "",
+    "output": "for i in range(30):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "导航从西门到楚枫桥",
+    "input": "",
+    "output": "spawn_location = carla.Location(-146, -161, 10)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(52, 52, 1)\n"
+  },
+  {
+    "instruction": "添加35个人",
+    "input": "",
+    "output": "for i in range(35):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "请开展从楚枫桥到北门的导航",
+    "input": "",
+    "output": "spawn_location = carla.Location(52, 52, 1)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(234, 20, 1)\n"
+  },
+  {
+    "instruction": "添加40个人",
+    "input": "",
+    "output": "for i in range(40):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "导航从楚枫桥到日新楼",
+    "input": "",
+    "output": "spawn_location = carla.Location(52, 52, 1)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(70, -60, 30)\n"
+  },
+  {
+    "instruction": "添加45个人",
+    "input": "",
+    "output": "for i in range(45):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "从楚枫桥导航到科技楼",
+    "input": "",
+    "output": "spawn_location = carla.Location(52, 52, 1)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(-103, -222, 10)\n"
+  },
+  {
+    "instruction": "添加1辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 1:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "导航从楚枫桥到体育馆",
+    "input": "",
+    "output": "spawn_location = carla.Location(52, 52, 1)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(212, -321, 30)\n"
+  },
+  {
+    "instruction": "添加50个人",
+    "input": "",
+    "output": "for i in range(50):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "请进入一号路口，设置红灯时间为三十秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 1:\n    # 设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(30)\n        print(\"已设置编号为{}的红灯时间为{}！\".format(1, 30))\n"
+  },
+  {
+    "instruction": "添加55个人",
+    "input": "",
+    "output": "for i in range(55):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "进入一号路口，请设置红灯时间为十秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 1:\n    # 设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(float(args.color_time))\n        print(\"已设置编号为{}的红灯时间为{}！\".format(1, 10))\n"
+  },
+  {
+    "instruction": "添加60个人",
+    "input": "",
+    "output": "for i in range(60):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "请进入一号路口，设置红灯时间为二十秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 1:\n    # 设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(float(args.color_time))\n        print(\"已设置编号为{}的红灯时间为{}！\".format(1, 20))\n"
+  },
+  {
+    "instruction": "添加65个人",
+    "input": "",
+    "output": "for i in range(65):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "一号路口，请设置红灯时间三十秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 1:\n    # 设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(float(args.color_time))\n        print(\"已设置编号为{}的红灯时间为{}！\".format(1, 30))\n"
+  },
+  {
+    "instruction": "添加70个人",
+    "input": "",
+    "output": "for i in range(70):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "进入一号路口，设置红灯时间三十秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 1:\n    # 设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(float(args.color_time))\n        print(\"已设置编号为{}的红灯时间为{}！\".format(1, 30))\n"
+  },
+  {
+    "instruction": "添加75个人",
+    "input": "",
+    "output": "for i in range(75):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "进入一号路口，请设置绿灯时间三十秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 1:\n    # 设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(1, 30))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(float(args.color_time))\n        print(\"已设置编号为{}的红灯时间为{}！\".format(uni_id, args.color_time))\n"
+  },
+  {
+    "instruction": "添加80个人",
+    "input": "",
+    "output": "for i in range(80):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "一号路口，设置绿灯时间二十秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 1:\n    # 设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(1, 20))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(float(args.color_time))\n        print(\"已设置编号为{}的红灯时间为{}！\".format(uni_id, args.color_time))\n"
+  },
+  {
+    "instruction": "添加85个人",
+    "input": "",
+    "output": "for i in range(85):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "一号路口，请设置绿灯时间五十秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 1:\n    # 设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(1, 50))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(float(args.color_time))\n        print(\"已设置编号为{}的红灯时间为{}！\".format(uni_id, args.color_time))\n"
+  },
+  {
+    "instruction": "添加90个人",
+    "input": "",
+    "output": "for i in range(90):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "请进入一号路口，设置绿灯时间为十五秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 1:\n    # 设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(1, 15))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(float(args.color_time))\n        print(\"已设置编号为{}的红灯时间为{}！\".format(uni_id, args.color_time))\n"
+  },
+  {
+    "instruction": "添加95个人",
+    "input": "",
+    "output": "for i in range(95):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "从日新楼导航到北门",
+    "input": "",
+    "output": "spawn_location = carla.Location(70, -60, 30)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(234, 20, 1)\n"
+  },
+  {
+    "instruction": "添加10辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 10:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "进入一号路口，设置绿灯时间四十秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 1:\n    # 设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(1, 40))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(float(args.color_time))\n        print(\"已设置编号为{}的红灯时间为{}！\".format(uni_id, args.color_time))\n"
+  },
+  {
+    "instruction": "添加100个人",
+    "input": "",
+    "output": "for i in range(100):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "进入一号路口，请设置红灯时间为十二秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 1:\n    # 设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(float(args.color_time))\n        print(\"已设置编号为{}的红灯时间为{}！\".format(1, 12))\n"
+  },
+  {
+    "instruction": "进入10号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town10)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "请进入一号路口，设置红灯时间为十九秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 1:\n    # 设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(float(args.color_time))\n        print(\"已设置编号为{}的红灯时间为{}！\".format(1, 19))\n"
+  },
+  {
+    "instruction": "进入1号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town1)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "一号路口，请设置红灯时间为二十五秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 1:\n    # 设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(float(args.color_time))\n        print(\"已设置编号为{}的红灯时间为{}！\".format(1, 25))\n"
+  },
+  {
+    "instruction": "进入5号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town5)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "进入一号路口，请设置红灯时间为八秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 1:\n    # 设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(float(args.color_time))\n        print(\"已设置编号为{}的红灯时间为{}！\".format(1, 8))\n"
+  },
+  {
+    "instruction": "进入15号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town15)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "请进入二号路口，设置红灯时间为八秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 2:\n    # 设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(float(args.color_time))\n        print(\"已设置编号为{}的红灯时间为{}！\".format(2, 8))\n"
+  },
+  {
+    "instruction": "进入18号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town18)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "进入二号路口，请设置红灯时间为十秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 2:\n    # 设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(float(args.color_time))\n        print(\"已设置编号为{}的红灯时间为{}！\".format(2, 10))\n"
+  },
+  {
+    "instruction": "进入20号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town20)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "二号路口，请设置红灯时间三十秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 2:\n    # 设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(float(args.color_time))\n        print(\"已设置编号为{}的红灯时间为{}！\".format(2, 30))\n"
+  },
+  {
+    "instruction": "进入25号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town25)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "二号路口，设置绿灯时间三十秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 2:\n    # 设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(2, 30))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(float(args.color_time))\n        print(\"已设置编号为{}的红灯时间为{}！\".format(uni_id, args.color_time))\n"
+  },
+  {
+    "instruction": "进入28号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town28)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "进入二号路口，设置绿灯时间四十秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 2:\n    # 设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(2, 40))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(float(args.color_time))\n        print(\"已设置编号为{}的红灯时间为{}！\".format(uni_id, args.color_time))\n"
+  },
+  {
+    "instruction": "进入30号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town30)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "从日新楼导航到科技楼",
+    "input": "",
+    "output": "spawn_location = carla.Location(70, -60, 30)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(-95, -220, 10)\n"
+  },
+  {
+    "instruction": "添加15辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 15:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "进入二号路口，请设置红灯时间四十秒",
+    "input": "",
+    "output": "for traffic_light in traffic_lights:\n    if float(traffic_light.get_opendrive_id()) == 2:\n    #  设置路灯时长\n    if float(args.color_id) == 1:\n        traffic_light.set_green_time(float(args.color_time))\n        print(\"已设置编号为{}的绿灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 2:\n        traffic_light.set_yellow_time(float(args.color_time))\n        print(\"已设置编号为{}的黄灯时间为{}！\".format(uni_id, args.color_time))\n    elif float(args.color_id) == 3:\n        traffic_light.set_red_time(float(args.color_time))\n        print(\"已设置编号为{}的红灯时间为{}！\".format(2, 40))\n"
+  },
+  {
+    "instruction": "进入32号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town32)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "模拟城市晚上下雨场景",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =0\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 30\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 0\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 0\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 150\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入35号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town35)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "请模拟城市早上下雨场景",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =0\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 30\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 0\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 0\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 60\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入38号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town38)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "请模拟早上下大雨交通场景",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =0\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 60\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 0\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 0\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 60\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入40号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town40)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "晴天中午交通场景",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =0\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 0\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 0\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 0\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 90\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入42号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town42)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "模拟城市天晴早上场景",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =0\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 0\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 0\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 0\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 60\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入45号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town45)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "请模拟早上暴雨场景",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =0\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 100\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 0\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 0\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 60\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入50号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town50)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "模拟早上多云交通场景",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =60\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 0\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 0\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 0\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 60\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入52号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town52)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "对晚上大风的交通场景进行模拟",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =0\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 0\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 0\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 60\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 150\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入55号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town55)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "请模拟夜晚场景",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =0\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 0\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 0\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 0\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 150\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入58号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town58)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "请开展从体育馆到湘江楼的导航",
+    "input": "",
+    "output": "spawn_location = carla.Location(212, -321, 30)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(100, 100, 10)\n"
+  },
+  {
+    "instruction": "添加5辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 5:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "进入白天模式",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =0\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 0\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 0\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 0\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 60\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入60号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town60)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "请模拟白天场景",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =0\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 0\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 0\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 0\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 60\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入65号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town65)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "白天小雨模式",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =0\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 30\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 0\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 0\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 60\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入68号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town68)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "请进入早上大风模式",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =0\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 0\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 0\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 60\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 60\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入70号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town70)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "夜晚模式",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =0\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 0\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 0\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 0\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 150\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入72号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town72)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "进入下雨天模式",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =0\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 30\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 0\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 0\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 60\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入75号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town75)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "进入小雨天模式",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =0\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 30\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 0\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 0\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 60\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入78号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town78)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "请进入多云场景",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =60\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 0\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 0\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 0\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 60\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入80号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town80)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "在场景中请添加雾气",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =0\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 0\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 80\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 0\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 60\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入82号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town82)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "请在场景中增加微风",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =0\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 0\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 0\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 30\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 60\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入83号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town83)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "请开展从体育馆到科技楼的导航",
+    "input": "",
+    "output": "spawn_location = carla.Location(212, -321, 30)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(-95, -220, 10)\n"
+  },
+  {
+    "instruction": "添加20辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 20:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "请模拟一个刮大风场景",
+    "input": "",
+    "output": "world = client.get_world()\nweather = Weather(world.get_weather())\nweather._storm.wetness = 0\nweather.weather.wetness = weather._storm.wetness\nweather._storm.clouds =0\nweather.weather.cloudines = weather._storm.clouds\nweather._storm.rain = 0\nweather.weather.precipitation = weather._storm.rain\nweather._storm.fog = 0\nweather.weather.fog_density = weather._storm.fog\nweather._storm.wind = 90\nweather.weather.wind_intensity = weather._storm.wind\nweather._storm.puddles = 0\nweather.weather.precipitation_deposits = weather._storm.puddles\nweather._sun.altitude = 60\nweather.weather.sun_altitude_angle = weather._sun.altitude\nworld.set_weather(weather.weather)\n"
+  },
+  {
+    "instruction": "进入85号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town85)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "加入十个人",
+    "input": "",
+    "output": "for i in range(10):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "进入88号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town88)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "加入九个行人",
+    "input": "",
+    "output": "for i in range(9):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "进入90号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town90)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "请加入十九个行人",
+    "input": "",
+    "output": "for i in range(19):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "进入91号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town91)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "添加五十五个行人",
+    "input": "",
+    "output": "for i in range(55):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "进入93号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town93)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "添加五十个行人",
+    "input": "",
+    "output": "for i in range(50):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "进入95号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town95)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "请添加三十个行人",
+    "input": "",
+    "output": "for i in range(30):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "进入98号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town98)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "请添加二十个行人",
+    "input": "",
+    "output": "for i in range(20):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "进入100号地图",
+    "input": "",
+    "output": "client = carla.Client('localhost', 2000)\nclient.set_timeout(10.0)\nprint(client.get_available_maps())  # 获取所有可使用地图名\nworld = client.get_world()\nprint(world.get_map())  # 获取当前使用地图名\nworld = client.load_world(Town100)\nprint(world.get_map().name)\n"
+  },
+  {
+    "instruction": "增加五十个行人",
+    "input": "",
+    "output": "for i in range(50):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "进入街道迅游模式",
+    "input": "",
+    "output": "spectator = world.get_spectator()\nlocation = carla.Location(x=400, y=-15, z=30)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\nf=1/2\nt=0\nwhile True:\ntime.sleep(args.time)\nt=t+1\nif t <= 275 / f:\ntransform = spectator.get_transform()\nlocation = transform.location + carla.Location(x=-2 * f, y=0.07 * f, z=0)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\n"
+  },
+  {
+    "instruction": "增加六十个行人",
+    "input": "",
+    "output": "for i in range(60):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "进入街道巡游模式",
+    "input": "",
+    "output": "spectator = world.get_spectator()\nlocation = carla.Location(x=400, y=-15, z=30)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\nf=1/2\nt=0\nwhile True:\ntime.sleep(args.time)\nt=t+1\nif t <= 275 / f:\ntransform = spectator.get_transform()\nlocation = transform.location + carla.Location(x=-2 * f, y=0.07 * f, z=0)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\n"
+  },
+  {
+    "instruction": "导航从湘江楼到楚枫桥",
+    "input": "",
+    "output": "spawn_location = carla.Location(100, 100, 10)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(52, 52, 1)\n"
+  },
+  {
+    "instruction": "添加25辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 25:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "请增加一百个行人",
+    "input": "",
+    "output": "for i in range(100):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "进入巡游模式",
+    "input": "",
+    "output": "spectator = world.get_spectator()\nlocation = carla.Location(x=400, y=-15, z=30)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\nf=1/2\nt=0\nwhile True:\ntime.sleep(args.time)\nt=t+1\nif t <= 275 / f:\ntransform = spectator.get_transform()\nlocation = transform.location + carla.Location(x=-2 * f, y=0.07 * f, z=0)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\n"
+  },
+  {
+    "instruction": "减去八个行人",
+    "input": "",
+    "output": "for i in range(8):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "进入巡游",
+    "input": "",
+    "output": "spectator = world.get_spectator()\nlocation = carla.Location(x=400, y=-15, z=30)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\nf=1/2\nt=0\nwhile True:\ntime.sleep(args.time)\nt=t+1\nif t <= 275 / f:\ntransform = spectator.get_transform()\nlocation = transform.location + carla.Location(x=-2 * f, y=0.07 * f, z=0)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\n"
+  },
+  {
+    "instruction": "减去五个行人",
+    "input": "",
+    "output": "for i in range(5):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "开始巡游",
+    "input": "",
+    "output": "spectator = world.get_spectator()\nlocation = carla.Location(x=400, y=-15, z=30)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\nf=1/2\nt=0\nwhile True:\ntime.sleep(args.time)\nt=t+1\nif t <= 275 / f:\ntransform = spectator.get_transform()\nlocation = transform.location + carla.Location(x=-2 * f, y=0.07 * f, z=0)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\n"
+  },
+  {
+    "instruction": "请减少二十个行人",
+    "input": "",
+    "output": "for i in range(20):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "开始巡游模式",
+    "input": "",
+    "output": "spectator = world.get_spectator()\nlocation = carla.Location(x=400, y=-15, z=30)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\nf=1/2\nt=0\nwhile True:\ntime.sleep(args.time)\nt=t+1\nif t <= 275 / f:\ntransform = spectator.get_transform()\nlocation = transform.location + carla.Location(x=-2 * f, y=0.07 * f, z=0)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\n"
+  },
+  {
+    "instruction": "减少三十个行人",
+    "input": "",
+    "output": "for i in range(30):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "开始进入巡游模式",
+    "input": "",
+    "output": "spectator = world.get_spectator()\nlocation = carla.Location(x=400, y=-15, z=30)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\nf=1/2\nt=0\nwhile True:\ntime.sleep(args.time)\nt=t+1\nif t <= 275 / f:\ntransform = spectator.get_transform()\nlocation = transform.location + carla.Location(x=-2 * f, y=0.07 * f, z=0)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\n"
+  },
+  {
+    "instruction": "请减少五十个行人",
+    "input": "",
+    "output": "for i in range(50):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "开始进入巡游",
+    "input": "",
+    "output": "spectator = world.get_spectator()\nlocation = carla.Location(x=400, y=-15, z=30)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\nf=1/2\nt=0\nwhile True:\ntime.sleep(args.time)\nt=t+1\nif t <= 275 / f:\ntransform = spectator.get_transform()\nlocation = transform.location + carla.Location(x=-2 * f, y=0.07 * f, z=0)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\n"
+  },
+  {
+    "instruction": "请减去二十三个行人",
+    "input": "",
+    "output": "for i in range(23):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "巡游模式",
+    "input": "",
+    "output": "spectator = world.get_spectator()\nlocation = carla.Location(x=400, y=-15, z=30)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\nf=1/2\nt=0\nwhile True:\ntime.sleep(args.time)\nt=t+1\nif t <= 275 / f:\ntransform = spectator.get_transform()\nlocation = transform.location + carla.Location(x=-2 * f, y=0.07 * f, z=0)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\n"
+  },
+  {
+    "instruction": "减少四十个行人",
+    "input": "",
+    "output": "for i in range(40):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "进入巡游",
+    "input": "",
+    "output": "spectator = world.get_spectator()\nlocation = carla.Location(x=400, y=-15, z=30)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\nf=1/2\nt=0\nwhile True:\ntime.sleep(args.time)\nt=t+1\nif t <= 275 / f:\ntransform = spectator.get_transform()\nlocation = transform.location + carla.Location(x=-2 * f, y=0.07 * f, z=0)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\n"
+  },
+  {
+    "instruction": "减少五十个行人",
+    "input": "",
+    "output": "for i in range(50):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "巡游进行",
+    "input": "",
+    "output": "spectator = world.get_spectator()\nlocation = carla.Location(x=400, y=-15, z=30)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\nf=1/2\nt=0\nwhile True:\ntime.sleep(args.time)\nt=t+1\nif t <= 275 / f:\ntransform = spectator.get_transform()\nlocation = transform.location + carla.Location(x=-2 * f, y=0.07 * f, z=0)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\n"
+  },
+  {
+    "instruction": "请删除五十一个行人",
+    "input": "",
+    "output": "for i in range(51):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "巡游模式进行",
+    "input": "",
+    "output": "spectator = world.get_spectator()\nlocation = carla.Location(x=400, y=-15, z=30)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\nf=1/2\nt=0\nwhile True:\ntime.sleep(args.time)\nt=t+1\nif t <= 275 / f:\ntransform = spectator.get_transform()\nlocation = transform.location + carla.Location(x=-2 * f, y=0.07 * f, z=0)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\n"
+  },
+  {
+    "instruction": "导航从湘江楼到日新楼",
+    "input": "",
+    "output": "spawn_location = carla.Location(100, 100, 10)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(70, -60, 30)\n"
+  },
+  {
+    "instruction": "添加30辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 30:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "请减少六十个行人",
+    "input": "",
+    "output": "for i in range(60):\n            spawn_point = carla.Transform()\n            loc = world.get_random_location_from_navigation()\n            if (loc != None):\n                spawn_point.location = loc\n                spawn_points.append(spawn_point)\n        # 2. we spawn the walker object\n        batch = []\n        walker_speed = []\n        for spawn_point in spawn_points:\n            walker_bp = random.choice(blueprintsWalkers)\n            # set as not invincible\n            if walker_bp.has_attribute('is_invincible'):\n                walker_bp.set_attribute('is_invincible', 'false')\n            # set the max speed\n            if walker_bp.has_attribute('speed'):\n                if (random.random() > percentagePedestriansRunning):\n                    # walking\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[1])\n                else:\n                    # running\n                    walker_speed.append(walker_bp.get_attribute('speed').recommended_values[2])\n            else:\n                print(\"Walker has no speed\")\n                walker_speed.append(0.0)\n            batch.append(SpawnActor(walker_bp, spawn_point))\n"
+  },
+  {
+    "instruction": "巡游进行中",
+    "input": "",
+    "output": "spectator = world.get_spectator()\nlocation = carla.Location(x=400, y=-15, z=30)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\nf=1/2\nt=0\nwhile True:\ntime.sleep(args.time)\nt=t+1\nif t <= 275 / f:\ntransform = spectator.get_transform()\nlocation = transform.location + carla.Location(x=-2 * f, y=0.07 * f, z=0)\nrotation = carla.Rotation(pitch=0, yaw=180, roll=0)\nnew_transform = carla.Transform(location, rotation)\nspectator.set_transform(new_transform)\n"
+  },
+  {
+    "instruction": "添加42辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 42:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "添加45辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 45:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "添加48辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 48:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "添加50辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 50:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "添加52辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 52:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "添加55辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 55:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "添加58辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 58:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "添加60辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 60:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "添加62辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 62:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "导航从科技楼到体育馆",
+    "input": "",
+    "output": "spawn_location = carla.Location(100, 100, 10)\n        spawn_rotation = carla.Rotation(pitch=0, yaw=-320, roll=0)  # 修改为您想要的朝向\n        spawn_point = carla.Transform(spawn_location, spawn_rotation)\n\n        # create the blueprint library\n        ego_vehicle_bp = blueprint_library.find('vehicle.audi.tt')\n        ego_vehicle_bp.set_attribute('color', '100, 250, 250')\n\n\n        # spawn the vehicle\n        vehicle = world.spawn_actor(ego_vehicle_bp, spawn_point)\n\n        # we need to tick the world once to let the client update the spawn position\n        world.tick()\n\n        # create the behavior agent\n        agent = BehaviorAgent(vehicle, behavior='normal')\n        destination = carla.Location(212, -321, 30)\n"
+  },
+  {
+    "instruction": "添加35辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 35:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "添加65辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 65:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "添加68辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 68:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "添加70辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 70:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "添加72辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 72:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "添加75辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 75:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "添加80辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 80:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "添加82辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 82:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "添加85辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 85:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "添加88辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 88:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  },
+  {
+    "instruction": "添加90辆车",
+    "input": "",
+    "output": "for n, transform in enumerate(spawn_points):\n            if n >= 90:\n                break\n            blueprint = random.choice(blueprints)\n            if blueprint.has_attribute('color'):\n                color = random.choice(blueprint.get_attribute('color').recommended_values)\n                blueprint.set_attribute('color', color)\n            if blueprint.has_attribute('driver_id'):\n                driver_id = random.choice(blueprint.get_attribute('driver_id').recommended_values)\n                blueprint.set_attribute('driver_id', driver_id)\n            if hero:\n                blueprint.set_attribute('role_name', 'hero')\n                hero = False\n            else:\n                blueprint.set_attribute('role_name', 'autopilot')\n"
+  }
+]
